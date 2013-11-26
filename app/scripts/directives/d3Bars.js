@@ -3,7 +3,7 @@
 angular.module('angularD3App')
   .directive('d3Bars', function($window, $timeout, d3Service) {
     return {
-      restrict: 'A',
+      restrict: 'E',
       scope: {
         data: '=',
         label: '@',
@@ -11,7 +11,6 @@ angular.module('angularD3App')
       },
       link: function(scope, ele, attrs) {
         d3Service.d3().then(function(d3) {
- 
           var renderTimeout;
           var margin = parseInt(attrs.margin) || 20,
               barHeight = parseInt(attrs.barHeight) || 20,
