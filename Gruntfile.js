@@ -31,6 +31,10 @@ module.exports = function (grunt) {
         files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all']
       },
+      test: {
+        files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
+        tasks: ['test']
+      },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
@@ -385,8 +389,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'watch',
-      'jshint'
+      'watch'
     ]);
   });
 

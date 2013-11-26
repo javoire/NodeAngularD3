@@ -4,7 +4,8 @@ angular.module('angularD3App', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'd3'
 ])
   .config(function ($routeProvider) {
     $routeProvider
