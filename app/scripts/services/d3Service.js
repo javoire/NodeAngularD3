@@ -3,9 +3,9 @@
 angular.module('d3', [])
   .factory('d3Service', function($document, $window, $q, $rootScope) {
     var d = $q.defer(),
-    d3service = {
-      d3: function() { return d.promise; }
-    };
+      d3service = {
+        d3: function() { return d.promise; }
+      };
     function onScriptLoad() {
       // Load client in the browser
       $rootScope.$apply(function() { d.resolve($window.d3); });

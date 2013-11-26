@@ -2,9 +2,10 @@
 
 angular.module('angularD3App')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.data = [
+      {name: 'Greg', score: 98},
+      {name: 'Ari', score: 96},
+      {name: 'Q', score: 75},
+      {name: 'Loser', score: 48}
     ];
   });
