@@ -12,9 +12,9 @@ angular.module('angularD3App')
       link: function(scope, ele, attrs) {
         d3Service.d3().then(function(d3) {
           var renderTimeout;
-          var margin = parseInt(attrs.margin) || 20,
-              barHeight = parseInt(attrs.barHeight) || 20,
-              barPadding = parseInt(attrs.barPadding) || 5;
+          var margin = parseInt(attrs.margin) || 0,
+              barHeight = parseInt(attrs.barHeight) || 40,
+              barPadding = parseInt(attrs.barPadding) || 10;
  
           var svg = d3.select(ele[0])
             .append('svg')
@@ -69,7 +69,7 @@ angular.module('angularD3App')
                     return color(d.score);
                   })
                   .transition()
-                    .duration(1000)
+                    .duration(300)
                     .attr('width', function(d) {
                       return xScale(d.score);
                     });

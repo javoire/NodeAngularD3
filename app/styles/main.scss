@@ -1,6 +1,8 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+// $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
-@import 'sass-bootstrap/lib/bootstrap';
+@import "http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400";
+@import "sass-bootstrap/lib/bootstrap";
+@import "layout";
 
 .browsehappy {
     margin: 0.2em 0;
@@ -13,6 +15,13 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
