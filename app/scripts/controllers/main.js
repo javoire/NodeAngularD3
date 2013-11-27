@@ -3,9 +3,9 @@
 angular.module('angularD3App')
   .controller('MainCtrl', function ($scope) {
     $scope.d3Data = [
-      {name: 'Greg', score: 98},
-      {name: 'Ari', score: 96},
-      {name: 'Q', score: 75},
-      {name: 'Loser', score: 48}
+      {name: 'This', score: 98},
+      {name: 'Is', score: 96},
+      {name: 'Some', score: 75},
+      {name: 'Data', score: 48}
     ];
   });

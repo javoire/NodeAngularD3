@@ -1,0 +1,13 @@
+@import "globals/variables";
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: $font-main, sans-serif;
+    font-weight: 300;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: $font-main, sans-serif;
+    font-weight: 300;
+}
