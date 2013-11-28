@@ -1,4 +1,4 @@
-@import "compass";
+@import "globals/all";
 
 .menu {
   width: 280px;
@@ -8,17 +8,20 @@
   height: 100%;
 }
 
-.menu, .content {
-  padding-top: 10px;
-  padding: 20px;
+.content {
+  margin-left: 280px;
 }
 
-.menu header, .content header {
-  height: 50px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+.menu, .content {
+  header {
+    margin-top: 30px;
+    margin-left: $content-padding;
+    margin-right: $content-padding;
+    height: 50px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 
-  h1, h2 {
-    font-size: 30px;
+    h1, h2 {
+      font-size: 30px;
+    }
   }
 }

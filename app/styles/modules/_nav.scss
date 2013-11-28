@@ -1,10 +1,26 @@
 @import "globals/all";
+@import "compass/css3/transition";
 
 .menu {
   nav {
+    padding-top: 20px;
     ul {
       li {
-        
+        a {
+          @include transition(color 0.2s);
+          font-size: 18px;
+          color: $primary-blue;
+          display: block;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-left: $content-padding;
+          padding-right: $content-padding;
+
+          &:hover {
+            text-decoration: none;
+            color: lighten($primary-blue, 20);
+          }
+        }
       }
     }
   }
