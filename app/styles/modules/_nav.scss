@@ -18,7 +18,12 @@
 
           &:hover {
             text-decoration: none;
-            color: lighten($primary-blue, 20);
+            color: lighten($primary-blue, 10);
+          }
+
+          &.active {
+            border-left: 4px solid $primary-blue;
+            padding-left: $content-padding - 4px;
           }
         }
       }
