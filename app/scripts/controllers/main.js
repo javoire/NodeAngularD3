@@ -8,4 +8,6 @@ angular.module('angularD3App')
       {name: 'Some', score: 75},
       {name: 'Data', score: 48}
     ];
+
+    $scope.donutData = [53245, 28479, 19697, 24037, 40245];
   });

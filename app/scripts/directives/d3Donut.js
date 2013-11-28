@@ -15,7 +15,9 @@ angular.module('angularD3App.directives')
  
           var svg = d3.select(ele[0])
             .append('svg')
-            .style('width', '100%');
+            .style('position', 'absolute')
+            .style('width', '100%')
+            .style('height', '100%');
  
           $window.onresize = function() {
             scope.$apply();
@@ -36,53 +38,28 @@ angular.module('angularD3App.directives')
  
             if (!data) { return; }
             if (renderTimeout) { clearTimeout(renderTimeout); }
- 
-            // renderTimeout = $timeout(function() {
-            //   var width = d3.select(ele[0])[0][0].offsetWidth - margin,
-            //       height = scope.data.length * (barHeight + barPadding),
-            //       color = d3.scale.category20(),
-            //       xScale = d3.scale.linear()
-            //         .domain([0, d3.max(data, function(d) {
-            //           return d.score;
-            //         })])
-            //         .range([0, width]);
- 
-            //   svg.attr('height', height);
- 
-            //   svg.selectAll('rect')
-            //     .data(data)
-            //     .enter()
-            //       .append('rect')
-            //       .on('click', function(d,i) {
-            //         return scope.onClick({item: d});
-            //       })
-            //       .attr('height', barHeight)
-            //       .attr('width', 140)
-            //       .attr('x', Math.round(margin/2))
-            //       .attr('y', function(d,i) {
-            //         return i * (barHeight + barPadding);
-            //       })
-            //       .attr('fill', function(d) {
-            //         return color(d.score);
-            //       })
-            //       .transition()
-            //         .duration(300)
-            //         .attr('width', function(d) {
-            //           return xScale(d.score);
-            //         });
-            //   svg.selectAll('text')
-            //     .data(data)
-            //     .enter()
-            //       .append('text')
-            //       .attr('fill', '#fff')
-            //       .attr('y', function(d,i) {
-            //         return i * (barHeight + barPadding) + 15;
-            //       })
-            //       .attr('x', 15)
-            //       .text(function(d) {
-            //         return d.name + ' (scored: ' + d.score + ')';
-            //       });
-            // }, 200);
+
+            var width = 460,
+                height = 300,
+                radius = Math.min(width, height) / 2;
+
+            var color = d3.scale.category20();
+
+            var pie = d3.layout.pie()
+                .sort(null);
+
+            var arc = d3.svg.arc()
+                .innerRadius(radius - 100)
+                .outerRadius(radius - 50);
+
+            svg.append('g')
+              .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+            var path = svg.selectAll('path')
+                .data(pie(data))
+              .enter().append('path')
+                .attr('fill', function(d, i) { return color(i); })
+                .attr('d', arc);
           };
         });
       }

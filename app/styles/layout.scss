@@ -9,7 +9,11 @@
 }
 
 .content {
-  margin-left: 280px;
+  left: 280px;
+  right: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
 }
 
 .menu, .content {
