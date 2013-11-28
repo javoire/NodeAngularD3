@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularD3App')
+angular.module('angularD3App.directives')
   .directive('d3Bars', function($window, $timeout, d3Service) {
     return {
       restrict: 'E',
