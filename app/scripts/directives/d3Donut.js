@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('angularD3App.directives')
-  .directive('d3Donut', function($window, $timeout, d3Service) {
+  .directive('d3Donut', function($window, $timeout, d3Service, Colors) {
     return {
-      restrict: 'E',
+      restrict: 'A',
       scope: {
         data: '=',
         label: '@',
         onClick: '&'
       },
-      link: function(scope, ele, attrs) {
+      link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
           var renderTimeout;
  
-          var svg = d3.select(ele[0])
+          var svg = d3.select(element[0])
             .append('svg')
-            .style('position', 'absolute')
-            .style('width', '100%')
-            .style('height', '100%');
+            .attr('position', 'absolute')
+            .attr('width', '100%')
+            .attr('height', '100%');
  
           $window.onresize = function() {
             scope.$apply();
@@ -39,11 +39,19 @@ angular.module('angularD3App.directives')
             if (!data) { return; }
             if (renderTimeout) { clearTimeout(renderTimeout); }
 
-            var width = 460,
-                height = 300,
+            var width = 400,
+                height = 400,
                 radius = Math.min(width, height) / 2;
 
-            var color = d3.scale.category20();
+            var color = d3.scale.linear()
+              .domain([
+                0,
+                data.length
+              ])
+              .range([
+                d3.hsl(Colors.getMainBlue()),
+                d3.hsl(Colors.getMainBlue()).brighter(1)
+              ]);
 
             var pie = d3.layout.pie()
                 .sort(null);
@@ -52,14 +60,15 @@ angular.module('angularD3App.directives')
                 .innerRadius(radius - 100)
                 .outerRadius(radius - 50);
 
-            svg.append('g')
-              .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+            var g = svg.append('g')
+              .attr('transform', 'translate(' + svg[0][0].clientWidth / 2 + ',' + svg[0][0].clientHeight / 2 + ')');
 
-            var path = svg.selectAll('path')
+            var path = g.selectAll('path')
                 .data(pie(data))
               .enter().append('path')
-                .attr('fill', function(d, i) { return color(i); })
-                .attr('d', arc);
+                .attr('fill', function(d, i) { return color(i); }) // TODO: dynamic normalization instead of '7'
+                .attr('d', arc)
+                .attr('margin-left', width);
           };
         });
       }

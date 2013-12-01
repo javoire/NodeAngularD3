@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('angularD3App.directives')
-  .directive('d3Bars', function($window, $timeout, d3Service) {
+  .directive('d3Bars', function($window, $timeout, d3Service, Colors) {
     return {
-      restrict: 'E',
+      restrict: 'A',
       scope: {
         data: '=',
         label: '@',
@@ -43,7 +43,15 @@ angular.module('angularD3App.directives')
             renderTimeout = $timeout(function() {
               var width = d3.select(ele[0])[0][0].offsetWidth - margin,
                   height = scope.data.length * (barHeight + barPadding),
-                  color = d3.scale.category20c(),
+                  color = d3.scale.linear()
+                .domain([
+                  0,
+                  data.length
+                ])
+                .range([
+                  d3.hsl(Colors.getMainBlue()),
+                  d3.hsl(Colors.getMainBlue()).brighter(1)
+                ]),
                   xScale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) {
                       return d.score;
@@ -65,8 +73,8 @@ angular.module('angularD3App.directives')
                   .attr('y', function(d,i) {
                     return i * (barHeight + barPadding);
                   })
-                  .attr('fill', function(d) {
-                    return color(d.score);
+                  .attr('fill', function(d, i) {
+                    return color(i);
                   })
                   .transition()
                     .duration(300)

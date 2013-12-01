@@ -3,10 +3,5 @@
 .content {
   overflow: hidden;
   .content-inner {
-    @include box-sizing("border-box");
-    padding: $content-padding;
-    position: absolute;
-    width: 100%;
-    height: 100%;
   }
 }

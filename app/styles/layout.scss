@@ -1,4 +1,5 @@
 @import "globals/all";
+@import "compass/css3/box-sizing";
 
 .menu {
   width: 280px;
@@ -14,6 +15,16 @@
   top: 0;
   position: absolute;
   height: 100%;
+
+  .content-inner {
+    @include box-sizing("border-box");
+    padding: $content-padding;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 80px;
+    right: 0;
+  }
 }
 
 .menu, .content {
