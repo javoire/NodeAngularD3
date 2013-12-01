@@ -3,12 +3,42 @@
 angular.module('angularD3App.directives')
   .directive('navigation', function ($location) {
     return {
-      template: '<ul><li ng-repeat="navItem in navList"><a ng-class="{active:navItem.active}" href="#{{navItem.url}}">{{navItem.title}}</a></li></ul>',
+      templateUrl: 'views/_navigation.html',
       restrict: 'A',
       link: function(scope, element, attrs) {
         scope.navList = [
-          { url: '/', title: 'Bars'},
-          { url: '/donut', title: 'Donut'}
+          {
+            url: '/',
+            title: 'Summary'
+          },
+          {
+            url: '/companies',
+            title: 'Companies',
+            subNav: [{
+              url: '/industries',
+              title: 'Industries'
+            },{
+              url: '/programmes',
+              title: 'Programmes'
+            },{
+              url: '/offers',
+              title: 'Offers'
+            },{
+              url: '/priorities',
+              title: 'Priorities'
+            }]
+          },
+          {
+            url: '/users',
+            title: 'Users',
+            subNav: [{
+              url: '/Bookmarks',
+              title: 'Bookmarks'
+            },{
+              url: '/Interests',
+              title: 'Interests'
+            }]
+          }
         ];
 
         function detectRoute() {

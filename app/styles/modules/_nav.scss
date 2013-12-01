@@ -9,21 +9,48 @@
         a {
           @include transition(color 0.2s);
           font-size: 18px;
-          color: $primary-blue;
           display: block;
-          padding-top: 5px;
-          padding-bottom: 5px;
+          padding-top: 8px;
+          padding-bottom: 8px;
           padding-left: $content-padding;
           padding-right: $content-padding;
+          // color: 
 
           &:hover {
+            color: $primary-blue;
             text-decoration: none;
-            color: lighten($primary-blue, 10);
           }
 
           &.active {
+            color: $primary-blue;
             border-left: 4px solid $primary-blue;
             padding-left: $content-padding - 4px;
+          }
+        }
+
+        ul { // subnav
+          border-left: 4px solid darken($primary-blue, 10);
+          background: rgba(0,0,0,0.02);
+          max-height: 200px; // lol, for the height animation to work, not awesome
+          overflow: hidden;
+
+          &.ng-hide-remove {
+            @include transition(all ease-out 0.3s);
+          }
+
+          &.ng-hide {
+            display: block !important;
+            max-height: 0;
+          }
+
+          &.ng-hide-add, &.ng-hide-remove {
+            display: block!important;
+          }
+
+          li {
+            a {
+              font-size: 14px;
+            }
           }
         }
       }
