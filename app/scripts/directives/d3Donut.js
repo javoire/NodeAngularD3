@@ -15,9 +15,11 @@ angular.module('angularD3App.directives')
  
           var svg = d3.select(element[0])
             .append('svg')
-            .attr('position', 'absolute')
-            .attr('width', '100%')
-            .attr('height', '100%');
+            .style('position', 'absolute')
+            .style('width', '100%')
+            .style('height', '100%')
+            .style('left', '0')
+            .style('top', '0'); // css perhaps?
  
           $window.onresize = function() {
             scope.$apply();
@@ -29,18 +31,25 @@ angular.module('angularD3App.directives')
             scope.render(scope.data);
           });
  
+          scope.$watch(function() {
+            return angular.element($window)[0].innerHeight;
+          }, function() {
+            scope.render(scope.data);
+          });
+ 
           scope.$watch('data', function(newData) {
             scope.render(newData);
           }, true);
  
           scope.render = function(data) {
             svg.selectAll('*').remove();
+            data = data.sort(d3.descending);
  
             if (!data) { return; }
             if (renderTimeout) { clearTimeout(renderTimeout); }
 
-            var width = 400,
-                height = 400,
+            var width = svg[0][0].clientWidth,
+                height = svg[0][0].clientHeight,
                 radius = Math.min(width, height) / 2;
 
             var color = d3.scale.linear()
@@ -57,18 +66,20 @@ angular.module('angularD3App.directives')
                 .sort(null);
 
             var arc = d3.svg.arc()
-                .innerRadius(radius - 100)
-                .outerRadius(radius - 50);
+                .innerRadius(radius - radius/1.7)
+                .outerRadius(radius - radius/3);
 
             var g = svg.append('g')
-              .attr('transform', 'translate(' + svg[0][0].clientWidth / 2 + ',' + svg[0][0].clientHeight / 2 + ')');
+              .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
             var path = g.selectAll('path')
                 .data(pie(data))
-              .enter().append('path')
-                .attr('fill', function(d, i) { return color(i); }) // TODO: dynamic normalization instead of '7'
-                .attr('d', arc)
-                .attr('margin-left', width);
+              .enter()
+                .append('g')
+                .attr('class', 'arc')
+                .append('path')
+                .attr('fill', function(d, i) { return color(i); })
+                .attr('d', arc);
           };
         });
       }

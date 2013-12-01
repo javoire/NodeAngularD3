@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angularD3App')
+angular.module('angularD3App.directives')
   .directive('navigation', function ($location) {
     return {
       template: '<ul><li ng-repeat="navItem in navList"><a ng-class="{active:navItem.active}" href="#{{navItem.url}}">{{navItem.title}}</a></li></ul>',

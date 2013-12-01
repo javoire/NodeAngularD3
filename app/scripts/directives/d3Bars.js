@@ -38,62 +38,48 @@ angular.module('angularD3App.directives')
             svg.selectAll('*').remove();
  
             if (!data) { return; }
-            if (renderTimeout) { clearTimeout(renderTimeout); }
  
-            renderTimeout = $timeout(function() {
-              var width = d3.select(ele[0])[0][0].offsetWidth - margin,
-                  height = scope.data.length * (barHeight + barPadding),
-                  color = d3.scale.linear()
-                .domain([
-                  0,
-                  data.length
-                ])
-                .range([
-                  d3.hsl(Colors.getMainBlue()),
-                  d3.hsl(Colors.getMainBlue()).brighter(1)
-                ]),
-                  xScale = d3.scale.linear()
-                    .domain([0, d3.max(data, function(d) {
-                      return d.score;
-                    })])
-                    .range([0, width]);
- 
-              svg.attr('height', height);
- 
-              svg.selectAll('rect')
-                .data(data)
-                .enter()
-                  .append('rect')
-                  .on('click', function(d,i) {
-                    return scope.onClick({item: d});
-                  })
-                  .attr('height', barHeight)
-                  .attr('width', 140)
-                  .attr('x', Math.round(margin/2))
-                  .attr('y', function(d,i) {
-                    return i * (barHeight + barPadding);
-                  })
-                  .attr('fill', function(d, i) {
-                    return color(i);
-                  })
-                  .transition()
-                    .duration(300)
-                    .attr('width', function(d) {
-                      return xScale(d.score);
-                    });
-              svg.selectAll('text')
-                .data(data)
-                .enter()
-                  .append('text')
-                  .attr('fill', '#fff')
-                  .attr('y', function(d,i) {
-                    return i * (barHeight + barPadding) + 15;
-                  })
-                  .attr('x', 15)
-                  .text(function(d) {
-                    return d.name + ' (scored: ' + d.score + ')';
+            var width = d3.select(ele[0])[0][0].offsetWidth - margin,
+                height = scope.data.length * (barHeight + barPadding),
+                color = d3.scale.linear()
+              .domain([
+                0,
+                data.length
+              ])
+              .range([
+                d3.hsl(Colors.getMainBlue()),
+                d3.hsl(Colors.getMainBlue()).brighter(1)
+              ]),
+                xScale = d3.scale.linear()
+                  .domain([0, d3.max(data, function(d) {
+                    return d.score;
+                  })])
+                  .range([0, width]);
+
+            svg.attr('height', height);
+
+            svg.selectAll('rect')
+              .data(data)
+              .enter()
+                .append('rect')
+                .on('click', function(d,i) {
+                  return scope.onClick({item: d});
+                })
+                .attr('height', barHeight)
+                .attr('width', 0)
+                .attr('x', Math.round(margin/2))
+                .attr('y', function(d,i) {
+                  return i * (barHeight + barPadding);
+                })
+                .attr('fill', function(d, i) {
+                  return color(i);
+                })
+                .attr('class', 'bar-horizontal')
+                .transition()
+                  .duration(300)
+                  .attr('width', function(d) {
+                    return xScale(d.score);
                   });
-            }, 200);
           };
         });
       }
