@@ -9,8 +9,7 @@ angular.module('angularD3App.directives')
         label: '@'
       },
       link: function (scope, element, attrs) {
-        d3Service.d3().then(function(d3) { 
-          console.log('var');
+        d3Service.d3().then(function(d3) {
           var svg = d3.select(element[0])
             .append('svg')
             .style('position', 'absolute')
@@ -42,12 +41,13 @@ angular.module('angularD3App.directives')
           scope.render = function(data) {
             if (!data) { return; }
             
+            console.log('d3 companies summary rendering', data);
             svg.selectAll('*').remove();
-            data = data.sort(d3.descending);
+            // data = data.sort(d3.descending);
 
             // actual graph stuff here:
 
-          }
+          };
         });
       }
     };
