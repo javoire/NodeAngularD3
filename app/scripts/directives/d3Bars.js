@@ -52,7 +52,7 @@ angular.module('angularD3App.directives')
               ]),
                 xScale = d3.scale.linear()
                   .domain([0, d3.max(data, function(d) {
-                    return d.score;
+                    return d.value;
                   })])
                   .range([0, width]);
 
@@ -78,7 +78,7 @@ angular.module('angularD3App.directives')
                 .transition()
                   .duration(300)
                   .attr('width', function(d) {
-                    return xScale(d.score);
+                    return xScale(d.value);
                   });
           };
         });

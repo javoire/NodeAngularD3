@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: CompaniesctrlCtrl', function () {
+describe('Directive: D3CompaniesSummary', function () {
 
   // load the directive's module
   beforeEach(module('angularD3App'));

@@ -18,12 +18,11 @@
 
   .content-inner {
     @include box-sizing("border-box");
-    padding: $content-padding;
     position: absolute;
-    left: 0;
-    bottom: 0;
-    top: 80px;
-    right: 0;
+    left: 30px;
+    bottom: 30px;
+    top: 80px + 30px;
+    right: 30px;
   }
 }
 

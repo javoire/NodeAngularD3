@@ -44,6 +44,10 @@ angular.module('angularD3App.directives')
         function detectRoute() {
           angular.forEach(scope.navList, function(item) {
             item.active = $location.path() === item.url ? true : false;
+
+            angular.forEach(item.subNav, function(subItem) {
+              subItem.active = $location.path() === subItem.url ? true : false;
+            });
           });
         }
 

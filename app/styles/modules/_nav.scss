@@ -50,7 +50,9 @@
           li {
             a {
               font-size: 14px;
+              padding-bottom: 0;
             }
+            &:last-child a { padding-bottom: 8px; }
           }
         }
       }

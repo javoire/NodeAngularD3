@@ -25,6 +25,10 @@ angular.module('angularD3App', [
         templateUrl: 'views/companies.html',
         controller: 'CompaniesCtrl'
       })
+      .when('/industries', {
+        templateUrl: 'views/companies.html',
+        controller: 'CompaniesCtrl'
+      })
       .when('/users', {
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl'

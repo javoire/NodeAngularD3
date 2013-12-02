@@ -12,7 +12,7 @@ angular.module('angularD3App.directives')
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3) {
           var renderTimeout;
- 
+
           var svg = d3.select(element[0])
             .append('svg')
             .style('position', 'absolute')
@@ -46,7 +46,6 @@ angular.module('angularD3App.directives')
             data = data.sort(d3.descending);
  
             if (!data) { return; }
-            if (renderTimeout) { clearTimeout(renderTimeout); }
 
             var width = svg[0][0].clientWidth,
                 height = svg[0][0].clientHeight,

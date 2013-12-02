@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Service: D3service', function () {
+describe('Service: d3service', function () {
 
   // load the service's module
-  // beforeEach(module('angularD3App'));
+  beforeEach(module('angularD3App'));
 
 });
